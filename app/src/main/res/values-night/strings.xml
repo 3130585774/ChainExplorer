@@ -3,4 +3,9 @@
     <string name="Transactiondetails">交易详情</string>
     <string name="overview">概述</string>
     <string name="block_height">区块高度</string>
+    <string name="confirm">确认数</string>
+    <string name="virtualSize">虚拟交易大小</string>
+    <string name="weight">交易重量</string>
+    <string name="input">输入</string>
+    <string name="txfee">手续费</string>
 </resources>

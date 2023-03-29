@@ -105,7 +105,7 @@
                 tools:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/textView6"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,39 +129,14 @@
                 tools:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/block_height"
+                    android:text="@string/confirm"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/block_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="25sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/block_height"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/block_height"
+                    android:id="@+id/tv_confirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -177,39 +152,14 @@
                 tools:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/block_height"
+                    android:text="出块时间"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/block_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="25sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/block_height"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/block_height"
+                    android:id="@+id/tv_transactionTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -225,39 +175,14 @@
                 tools:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/block_height"
+                    android:text="总交易大小"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/block_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="25sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/block_height"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/block_height"
+                    android:id="@+id/tv_totalTransactionSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -273,15 +198,83 @@
                 tools:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/block_height"
+                    android:text="@string/virtualSize"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/block_height"
+                    android:id="@+id/tv_virtualSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/weight"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tv_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/input"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tv_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/output"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tv_output"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -298,15 +291,15 @@
                 >
 
                 <TextView
-                    android:id="@+id/textView6"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/block_height"
+                    android:text="@string/txfee"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/block_height"
+                    android:id="@+id/tv_txfee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
