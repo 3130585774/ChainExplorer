@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TransactionDetailActivity">
+
+    <TextView
+        android:id="@+id/tv_fullName"
+        android:layout_width="278dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="16dp"
+        android:textSize="60sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="26dp" />
+
+    <TextView
+        android:id="@+id/tv_height"
+        android:layout_width="282dp"
+        android:layout_height="50dp" />
+</LinearLayout>
