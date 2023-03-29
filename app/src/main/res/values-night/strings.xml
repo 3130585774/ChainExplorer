@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">河工区块链浏览器</string>
     <string name="Transactiondetails">交易详情</string>
     <string name="overview">概述</string>
     <string name="block_height">区块高度</string>

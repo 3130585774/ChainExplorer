@@ -1,11 +1,8 @@
 package com.hbgcjsxy.chainexplorer;
 
-import org.xutils.http.annotation.HttpResponse;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class Transaction_fills {
+public class Response {
     private String code;
 
     private String msg;
