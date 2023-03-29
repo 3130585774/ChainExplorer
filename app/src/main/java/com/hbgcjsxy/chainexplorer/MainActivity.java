@@ -1,6 +1,7 @@
 package com.hbgcjsxy.chainexplorer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -34,11 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置（绑定）该界面对应的布局文件
-//        setContentView(R.layout.activity_main);
         //使用xutils库初始化
         x.view().inject(this);
-
         initView();
     }
 

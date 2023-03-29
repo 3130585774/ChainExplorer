@@ -9,4 +9,6 @@
     <string name="input">输入</string>
     <string name="output">输出</string>
     <string name="txfee">手续费</string>
+    <string name="totalTransactionSize">总交易大小</string>
+    <string name="back">返回</string>
 </resources>

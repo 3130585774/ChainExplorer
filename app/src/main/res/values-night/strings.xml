@@ -8,4 +8,5 @@
     <string name="weight">交易重量</string>
     <string name="input">输入</string>
     <string name="txfee">手续费</string>
+    <string name="totalTransactionSize">总交易大小</string>
 </resources>

@@ -4,30 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     android:orientation="vertical"
     tools:context=".TransactionDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="70dp"
         android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:contentDescription="@string/back"
             android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="285dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -35,9 +33,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="79dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/TRANSPARENT"
             app:srcCompat="@drawable/btc" />
 
 
@@ -47,13 +46,14 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:src="@drawable/btc_logo" />
 
         <TextView
@@ -62,7 +62,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:text="type"
             android:textSize="40sp" />
 
     </LinearLayout>
@@ -70,6 +69,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <TextView
@@ -77,47 +77,47 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="@string/Transactiondetails"
             android:textColor="@color/black"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/overview"
             android:textColor="@color/c_333333"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/block_height"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/block_height"
+                    android:id="@+id/tv_block_height"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
@@ -125,12 +125,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/confirm"
                     android:textSize="25sp" />
@@ -138,9 +137,8 @@
                 <TextView
                     android:id="@+id/tv_confirm"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
@@ -148,12 +146,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="出块时间"
                     android:textSize="25sp" />
@@ -161,32 +158,30 @@
                 <TextView
                     android:id="@+id/tv_transactionTime"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
+                    android:textAllCaps="false"
                     android:textSize="25sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="总交易大小"
+                    android:text="@string/totalTransactionSize"
                     android:textSize="25sp" />
 
                 <TextView
                     android:id="@+id/tv_totalTransactionSize"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
@@ -194,12 +189,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/virtualSize"
                     android:textSize="25sp" />
@@ -207,9 +201,8 @@
                 <TextView
                     android:id="@+id/tv_virtualSize"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
@@ -217,12 +210,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/weight"
                     android:textSize="25sp" />
@@ -230,9 +222,8 @@
                 <TextView
                     android:id="@+id/tv_weight"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
@@ -240,12 +231,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/input"
                     android:textSize="25sp" />
@@ -253,9 +243,8 @@
                 <TextView
                     android:id="@+id/tv_input"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
@@ -263,12 +252,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/output"
                     android:textSize="25sp" />
@@ -276,9 +264,8 @@
                 <TextView
                     android:id="@+id/tv_output"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
@@ -286,14 +273,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_marginLeft="20dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/txfee"
                     android:textSize="25sp" />
@@ -301,13 +286,11 @@
                 <TextView
                     android:id="@+id/tv_txfee"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
                     android:textAlignment="textEnd"
                     android:textSize="25sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

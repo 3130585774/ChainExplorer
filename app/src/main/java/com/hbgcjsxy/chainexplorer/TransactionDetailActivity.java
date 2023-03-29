@@ -2,6 +2,7 @@ package com.hbgcjsxy.chainexplorer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -20,10 +21,33 @@ import org.xutils.x;
 import java.util.List;
 
 
+@SuppressLint("NonConstantResourceId")
 @ContentView(R.layout.activity_transaction_detail)
 public class TransactionDetailActivity extends AppCompatActivity {
     @ViewInject(R.id.iv_back)
     private ImageView iv_back;
+    @ViewInject(R.id.iv_logo)
+    private ImageView iv_logo;
+    @ViewInject(R.id.tv_logo_title)
+    private TextView tv_logo_title;
+    @ViewInject(R.id.tv_block_height)
+    private TextView tv_block_height;
+    @ViewInject(R.id.tv_confirm)
+    private TextView tv_confirm;
+    @ViewInject(R.id.tv_transactionTime)
+    private TextView tv_transactionTime;
+    @ViewInject(R.id.tv_totalTransactionSize)
+    private TextView tv_totalTransactionSize;
+    @ViewInject(R.id.tv_virtualSize)
+    private TextView tv_virtualSize;
+    @ViewInject(R.id.tv_weight)
+    private TextView tv_weight;
+    @ViewInject(R.id.tv_input)
+    private TextView tv_input;
+    @ViewInject(R.id.tv_output)
+    private TextView tv_output;
+    @ViewInject(R.id.tv_txfee)
+    private TextView tv_txfee;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +73,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject result) {
                 //网络请求成功时会调用该方法
-//                show_transaction_fills(transaction_fills_praseRespone(result));
+                show_transaction_fills(transaction_fills_praseRespone(result));
             }
 
             @Override
@@ -81,14 +105,25 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private void Iv_back(){
         this.finish();
     }
-//    private Response transaction_fills_praseRespone(JSONObject result){
-//        return JSON.parseObject(result.toString(),Response.class);
-//
-//    }
-//    private void show_transaction_fills(Response transaction_fills){
-//        Data data = transaction_fills.getData().get(0);
-////        System.out.println(data.getChainFullName());
-//        tv_fullName.setText(data.getChainFullName());
-//        tv_height.setText("区块高度："+data.getHeight());
-//    }
+    private Response transaction_fills_praseRespone(JSONObject result){
+        return JSON.parseObject(result.toString(),Response.class);
+
+    }
+    private void show_transaction_fills(Response transaction_fills){
+        Data data = transaction_fills.getData().get(0);
+        tv_logo_title.setText(data.getChainFullName());
+        tv_block_height.setText(data.getHeight());
+        tv_confirm.setText(data.getConfirm());
+        tv_transactionTime.setText(Uitls.TimestampToTime(data.getTransactionTime()));
+        tv_totalTransactionSize.setText(String.format("%s Byte", data.getTotalTransactionSize()));
+        tv_virtualSize.setText(String.format("%s Byte", data.getVirtualSize()));
+        tv_weight.setText(data.getWeight());
+//        tv_input.setText(data);
+        tv_txfee.setText(data.getTxfee());
+    }
+    private double CalculateTransaction(){
+        //TODO 计算交易输入输出
+        double re = 0;
+        return re;
+    }
 }
