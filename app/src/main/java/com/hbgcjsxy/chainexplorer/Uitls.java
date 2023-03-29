@@ -11,4 +11,10 @@ public class Uitls {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
     }
+    public static double CalculateTransaction(InputDetails inputDetails,OutputDetails outputDetails){
+        //TODO 计算交易输入输出
+
+        double re = 0;
+        return re;
+    }
 }

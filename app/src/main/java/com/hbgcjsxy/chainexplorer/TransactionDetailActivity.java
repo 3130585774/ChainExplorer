@@ -121,9 +121,5 @@ public class TransactionDetailActivity extends AppCompatActivity {
 //        tv_input.setText(data);
         tv_txfee.setText(data.getTxfee());
     }
-    private double CalculateTransaction(){
-        //TODO 计算交易输入输出
-        double re = 0;
-        return re;
-    }
+
 }
