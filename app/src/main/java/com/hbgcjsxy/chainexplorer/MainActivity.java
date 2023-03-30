@@ -1,7 +1,6 @@
 package com.hbgcjsxy.chainexplorer;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.xutils.view.annotation.ContentView;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //使用xutils库初始化
         x.view().inject(this);
         initView();
+        AlertDialog();
     }
 
     private void initView() {
@@ -104,5 +105,14 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setAnchorView(tvType);
         popupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
         popupWindow.show();//将创建好的popupwindow展示出来。
+    }
+
+    private void AlertDialog(){
+    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this)
+            .setTitle("错误")
+            .setMessage("查询失败，请重试！")
+            .setIcon(R.drawable.error);
+
+    alertDialog.show();
     }
 }

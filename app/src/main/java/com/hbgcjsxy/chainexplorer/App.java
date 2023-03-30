@@ -13,5 +13,6 @@ public class App extends Application {
         
         x.Ext.init(this);
         x.Ext.setDebug(Constant.isDebug);
+
     }
 }
