@@ -1,0 +1,50 @@
+HTTP请求
+GET /api/v5/explorer/blockchain/info
+
+请求示例
+
+GET /api/v5/explorer/blockchain/info?chainShortName=btc
+请求参数
+
+{
+    "code": "0",
+    "msg": "",
+    "data": [
+        {
+            "chainFullName": "Ethereum",
+            "chainShortName": "ETH",
+            "symbol": "ETH",
+            "rank": "2",
+            "mineable": true,
+            "algorithm": "Ethash ",
+            "consensus": "PoW+PoS",
+            "diffEstimation": "",
+            "currentDiff": "12.34P",
+            "diffAdjustTime": "",
+            "circulatingSupply": "119663990.60586369",
+            "totalSupply": "119663990.60586369",
+            "tps": "12.41",
+            "lastHeight": "15496152",
+            "lastBlockTime": "1662634452000",
+            "issueDate": "1406131200000"
+        }
+    ]
+}
+返回参数
+参数名	类型	描述
+chainFullName	String	公链全称，例如：Bitcoin
+chainShortName	String	公链缩写符号，例如：BTC
+symbol	String	公链原生代币，例如：btc
+rank	String	公链市值排名
+mineable	Bol	是否支持挖矿，例如：true / false
+algorithm	String	核心算法，例如：SHA-256
+consensus	String	共识算法，例如：PoW
+diffEstimation	String	下次挖矿难度预测，BTC的单位：T， 如果该某个链没有该参数，返回""
+currentDiff	String	当前全网挖矿难度
+diffAdjustTime	String	下次挖矿难度调整时间
+circulatingSupply	String	流通量
+totalSupply	String	最大供应量
+tps	String	链上每秒交易处理数量。近一周平均值
+lastHeight	String	最新区块高度
+lastBlockTime	String	上一个区块时间；Unix时间戳的毫秒数格式，如 1597026383085
+issueDate	String	发行日期；Unix时间戳的毫秒数格式，如 1597026383085
