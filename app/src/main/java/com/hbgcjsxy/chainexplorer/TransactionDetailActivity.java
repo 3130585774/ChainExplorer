@@ -80,7 +80,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 //网络请求成功时会调用该方法
                 Response response = Uitls.transaction_fills_praseRespone(result);
                 show_transaction_fills(response);
-                if (Objects.equals(response.getCode(), "0")) searchError();
+                if (!Objects.equals(response.getCode(), "0")) searchError();
             }
 
             @Override
@@ -144,12 +144,24 @@ public class TransactionDetailActivity extends AppCompatActivity {
     }
 
     private void searchError() {
+        alertDialog =  new AlertDialog.Builder(this)
+                .setTitle("错误！")//标题
+                .setMessage("查询失败")//内容
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Iv_back();
+                    }
+                })
+                .create();
 
 //        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this).setTitle("错误").setMessage("查询失败，请重试！").setIcon(R.drawable.error);
 //        alertDialog.show();
-        alertDialog.setTitle("错误");
-        alertDialog.setMessage("网络错误");
-        alertDialog.setButton(1, "确定", (dialogInterface, i) -> Iv_back());
+//        alertDialog.setTitle("错误");
+//        alertDialog.setMessage("网络错误");
+//        alertDialog.setButton(1, "确定", (dialogInterface, i) -> Iv_back());
+//        alertDialog.
+//        alertDialog.show();
         alertDialog.show();
     }
 
