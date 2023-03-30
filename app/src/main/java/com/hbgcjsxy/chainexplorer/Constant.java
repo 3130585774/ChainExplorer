@@ -16,7 +16,7 @@ public class Constant {
     public static final String TRANSACTION = "api/v5/explorer/transaction/transaction-fills";
     public static final boolean isDebug = true;
 
-    public static final String[] TYPE_ARRAY = {"BTC", "ETH", "LTC"};
+    public static final String[] TYPE_ARRAY = {"BTC", "ETH", "OKC","TRON"};
 
     public static final String test_btc_tx_hash = "0a37339bfe54474095e96b83ded45aa1f745beee4faf55039f25087858d5c2cf";
 

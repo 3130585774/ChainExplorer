@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("type", tvType.getText().toString().trim());
         intent.putExtra("hash", etInput.getText().toString().trim());
         startActivity(intent);
+
     }
 
     /**
