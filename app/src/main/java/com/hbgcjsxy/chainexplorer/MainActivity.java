@@ -14,6 +14,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
+import org.xutils.HttpManager;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -23,7 +27,7 @@ import java.util.Objects;
 @SuppressLint("NonConstantResourceId")
 @ContentView(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
-
+    private Response response;
     @ViewInject(R.id.tv_type)
     private TextView tvType;
     @ViewInject(R.id.et_hash)
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView okc_tv_rank;
 
     @ViewInject(R.id.okc_tv_height)
-    private TextView getEth_tv_height;
+    private TextView okc_tv_height;
 
     @ViewInject(R.id.okc_tv_lastBlockTime)
     private TextView okc_tv_lastBlockTime;
@@ -91,14 +95,7 @@ public class MainActivity extends AppCompatActivity {
         //设置输入框后面的按钮的点击事件
         btnSearch.setOnClickListener(view -> {
             //当用户点击输入框后面的向右的箭头区域时，程序会到此处执行
-            Response responseSerializable = null;
-            try {
-                responseSerializable = Uitls.GetResponseFills(tvType.getText().toString(), etInput.getText().toString());
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            openTransactionPage(responseSerializable);
+            openTransactionPage();
         });
 
         //对要展示的popupwindow进行初始化
@@ -133,17 +130,19 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 该方法用于根据用户的选择和输入内容，查询区块链中的交易详情信息，并展示出来
      */
-    private void openTransactionPage(Response response) {
+    private void openTransactionPage() {
         // TODO: 2023/3/28 根据用户的选择和输入内容，查询区块链中的交易详情信息，并展示出来
-        ResponseSerializable responseSerializable = new ResponseSerializable();
+//        ResponseSerializable responseSerializable = new ResponseSerializable();
         Intent intent = new Intent(this, TransactionDetailActivity.class);
+        intent.putExtra("type",tvType.getText().toString().trim());
+        intent.putExtra("txid",etInput.getText().toString().trim());
         //携带数据进行跳转
-        if (Objects.equals(response.getCode(), "0")) {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("re", responseSerializable);
-            intent.putExtras(bundle);
+//        if (Objects.equals(response.getCode(), "0")) {
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("re", responseSerializable);
+//            intent.putExtras(bundle);
             startActivity(intent);
-        }
+
     }
 
     /**
@@ -153,14 +152,8 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setAnchorView(tvType);
         popupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
         popupWindow.show();//将创建好的popupwindow展示出来。
+
     }
 
-    private void AlertDialog(){
-    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this)
-            .setTitle("错误")
-            .setMessage("查询失败，请重试！")
-            .setIcon(R.drawable.error);
 
-    alertDialog.show();
-    }
 }
