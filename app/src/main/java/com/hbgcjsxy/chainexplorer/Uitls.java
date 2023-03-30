@@ -39,19 +39,20 @@ public class Uitls {
         return re;
     }
 
-    public static ResponseSerializable GetResponse(String type, String txid) {
+    public static Response GetResponseFills(String type, String txid) throws InterruptedException {
         HttpManager manager = x.http();
         RequestParams params = new RequestParams(Constant.BASE_URL + Constant.TRANSACTION);
         params.addHeader("Ok-Access-Key", Constant.API_KEY);
         params.addParameter("chainShortName", type);
         params.addParameter("txid", txid);
-        ResponseSerializable responseSerializable = new ResponseSerializable();
+        final Response[] response = {new Response()};
         manager.get(params, new Callback.CommonCallback<org.json.JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
                 //网络请求成功时会调用该方法
-                Response response = transaction_fills_praseRespone(result);
-                responseSerializable.setResponse(response);
+                response[0] = transaction_fills_praseRespone(result);
+//                System.out.println(response[0].getCode());
+
             }
 
             @Override
@@ -73,8 +74,8 @@ public class Uitls {
                 //网络请求结束时会调用该方法
                 System.out.println("over");
             }
-        });
-        return responseSerializable;
+        }).wait();
+        return response[0];
     }
 
     private static Response transaction_fills_praseRespone(JSONObject result) {

@@ -58,13 +58,13 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
         //1、根据用户的选择和输入的内容 通过网络查询交易数据
         Intent intent = getIntent();
-        String type = intent.getStringExtra("type");
-        String hash = intent.getStringExtra("hash");
-        System.out.println(type);
-        System.out.println(hash);
+        ResponseSerializable responseSerializable=(ResponseSerializable) intent.getSerializableExtra("re");
+        Response response = responseSerializable.getResponse();
         iv_back.setOnClickListener(view -> {
             Iv_back();
         });
+        System.out.println(response.getCode());
+        show_transaction_fills(response);
 
 
 

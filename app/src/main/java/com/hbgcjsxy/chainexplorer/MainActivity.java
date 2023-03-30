@@ -1,10 +1,9 @@
 package com.hbgcjsxy.chainexplorer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +18,9 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.Objects;
+
+@SuppressLint("NonConstantResourceId")
 @ContentView(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         //使用xutils库初始化
         x.view().inject(this);
         initView();
-        AlertDialog();
     }
 
     private void initView() {
@@ -50,7 +51,14 @@ public class MainActivity extends AppCompatActivity {
         //设置输入框后面的按钮的点击事件
         btnSearch.setOnClickListener(view -> {
             //当用户点击输入框后面的向右的箭头区域时，程序会到此处执行
-            openTransactionPage();
+            Response responseSerializable = null;
+            try {
+                responseSerializable = Uitls.GetResponseFills(tvType.getText().toString(), etInput.getText().toString());
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            openTransactionPage(responseSerializable);
         });
 
         //对要展示的popupwindow进行初始化
@@ -64,15 +72,12 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
 
         //ListPopupWindowClickEvent
-        popupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String type = Constant.TYPE_ARRAY[position];
-                tvType.setText(type);
-                etInput.setText(Constant.test_btc_tx_hash);//测试hash
-                if (popupWindow != null && popupWindow.isShowing()) {
-                    popupWindow.dismiss();//关闭popupwindow窗口
-                }
+        popupWindow.setOnItemClickListener((adapterView, view, position, l) -> {
+            String type = Constant.TYPE_ARRAY[position];
+            tvType.setText(type);
+            etInput.setText(Constant.test_btc_tx_hash);//测试hash
+            if (popupWindow != null && popupWindow.isShowing()) {
+                popupWindow.dismiss();//关闭popupwindow窗口
             }
         });
 
@@ -88,14 +93,17 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 该方法用于根据用户的选择和输入内容，查询区块链中的交易详情信息，并展示出来
      */
-    private void openTransactionPage() {
+    private void openTransactionPage(Response response) {
         // TODO: 2023/3/28 根据用户的选择和输入内容，查询区块链中的交易详情信息，并展示出来
+        ResponseSerializable responseSerializable = new ResponseSerializable();
         Intent intent = new Intent(this, TransactionDetailActivity.class);
         //携带数据进行跳转
-        intent.putExtra("type", tvType.getText().toString().trim());
-        intent.putExtra("hash", etInput.getText().toString().trim());
-        startActivity(intent);
-
+        if (Objects.equals(response.getCode(), "0")) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("re", responseSerializable);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 
     /**
