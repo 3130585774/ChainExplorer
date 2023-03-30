@@ -134,14 +134,10 @@ public class MainActivity extends AppCompatActivity {
         // TODO: 2023/3/28 根据用户的选择和输入内容，查询区块链中的交易详情信息，并展示出来
 //        ResponseSerializable responseSerializable = new ResponseSerializable();
         Intent intent = new Intent(this, TransactionDetailActivity.class);
-        intent.putExtra("type",tvType.getText().toString().trim());
-        intent.putExtra("txid",etInput.getText().toString().trim());
+        intent.putExtra("type", tvType.getText().toString().trim());
+        intent.putExtra("txid", etInput.getText().toString().trim());
         //携带数据进行跳转
-//        if (Objects.equals(response.getCode(), "0")) {
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("re", responseSerializable);
-//            intent.putExtras(bundle);
-            startActivity(intent);
+        startActivity(intent);
 
     }
 

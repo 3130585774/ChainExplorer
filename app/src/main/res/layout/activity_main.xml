@@ -63,6 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:autofillHints=""
             android:background="@null"
             android:hint="交易地址"
             android:inputType="text"
@@ -72,8 +73,7 @@
             android:textColor="@color/c_333333"
             android:textColorHint="@color/c_999999"
             android:textSize="15sp"
-            android:autofillHints=""
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
         <!--向右的箭头-->
         <Button
@@ -82,7 +82,7 @@
             android:layout_height="15dp"
             android:layout_marginEnd="15dp"
             android:background="@mipmap/ic_arrow_right"
-            tools:ignore="RtlHardcoded,SpeakableTextPresentCheck" />
+            tools:ignore="RtlHardcoded,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </LinearLayout>
 
     <GridLayout

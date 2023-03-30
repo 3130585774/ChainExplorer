@@ -154,14 +154,6 @@ public class TransactionDetailActivity extends AppCompatActivity {
                     }
                 })
                 .create();
-
-//        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this).setTitle("错误").setMessage("查询失败，请重试！").setIcon(R.drawable.error);
-//        alertDialog.show();
-//        alertDialog.setTitle("错误");
-//        alertDialog.setMessage("网络错误");
-//        alertDialog.setButton(1, "确定", (dialogInterface, i) -> Iv_back());
-//        alertDialog.
-//        alertDialog.show();
         alertDialog.show();
     }
 
