@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView okc_tv_rank;
 
     @ViewInject(R.id.okc_tv_height)
-    private TextView getEth_tv_height;
+    private TextView okc_tv_height;
 
     @ViewInject(R.id.okc_tv_lastBlockTime)
     private TextView okc_tv_lastBlockTime;
