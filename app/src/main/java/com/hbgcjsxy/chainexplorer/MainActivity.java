@@ -31,6 +31,46 @@ public class MainActivity extends AppCompatActivity {
     @ViewInject(R.id.btn_search)
     private Button btnSearch;
 
+    //BTC
+    @ViewInject(R.id.btc_tv_rank)
+    private TextView btc_tv_rank;
+
+    @ViewInject(R.id.btc_tv_height)
+    private TextView btc_tv_height;
+
+    @ViewInject(R.id.btc_tv_lastBlockTime)
+    private TextView btc_tv_lastBlockTime;
+
+    //ETH
+    @ViewInject(R.id.eth_tv_rank)
+    private TextView eth_tv_rank;
+
+    @ViewInject(R.id.eth_tv_height)
+    private TextView eth_tv_height;
+
+    @ViewInject(R.id.eth_tv_lastBlockTime)
+    private TextView eth_tv_lastBlockTime;
+
+    //OKC
+    @ViewInject(R.id.okc_tv_rank)
+    private TextView okc_tv_rank;
+
+    @ViewInject(R.id.okc_tv_height)
+    private TextView getEth_tv_height;
+
+    @ViewInject(R.id.okc_tv_lastBlockTime)
+    private TextView okc_tv_lastBlockTime;
+
+    //TRON
+    @ViewInject(R.id.tron_tv_rank)
+    private TextView tron_tv_rank;
+
+    @ViewInject(R.id.tron_tv_height)
+    private TextView tron_tv_height;
+
+    @ViewInject(R.id.tron_tv_lastBlockTime)
+    private TextView tron_tv_lastBlockTime;
+
     //列表选项的window
     private ListPopupWindow popupWindow;
 

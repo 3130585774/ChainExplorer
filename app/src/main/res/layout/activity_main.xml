@@ -11,7 +11,6 @@
 
     <!--图标-->
 
-    <!--标题-->
 
     <ImageView
         android:layout_width="133dp"
@@ -22,6 +21,8 @@
         android:src="@drawable/btc"
         tools:ignore="ContentDescription" />
 
+
+    <!--标题-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
