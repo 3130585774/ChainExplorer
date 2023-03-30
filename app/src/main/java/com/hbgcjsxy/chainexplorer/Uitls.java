@@ -15,12 +15,16 @@ import java.util.Date;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 
 public class Uitls {
-    public static String TimestampToTime(String timeStamp) {
+    public static String TimestampToTime(String timeStampStr) {
+        Long timeStamp = Long.parseLong(timeStampStr);
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        return sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
+        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA).format(new Date(timeStamp));
+        System.out.println(date);
+        System.out.println(timeStamp);
+        return date;
     }
 
     public static Dictionary<String, Double> CalculateTransaction(List<InputDetails> inputDetails, List<OutputDetails> outputDetails) {
@@ -41,6 +45,11 @@ public class Uitls {
 
     public static Response transaction_fills_praseRespone(JSONObject result) {
         return JSON.parseObject(result.toString(), Response.class);
+
+    }
+
+    public static ResponseInfo info_praseRespone(JSONObject result) {
+        return JSON.parseObject(result.toString(), ResponseInfo.class);
 
     }
 }

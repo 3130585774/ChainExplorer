@@ -1,8 +1,11 @@
 package com.hbgcjsxy.chainexplorer;
 
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,19 +18,19 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
-import org.xutils.HttpManager;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 @SuppressLint("NonConstantResourceId")
 @ContentView(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
-    private Response response;
     @ViewInject(R.id.tv_type)
     private TextView tvType;
     @ViewInject(R.id.et_hash)
@@ -77,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
     //列表选项的window
     private ListPopupWindow popupWindow;
+    private AlertDialog alertDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         //使用xutils库初始化
         x.view().inject(this);
         initView();
+
     }
 
     private void initView() {
@@ -112,12 +118,16 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setOnItemClickListener((adapterView, view, position, l) -> {
             String type = Constant.TYPE_ARRAY[position];
             tvType.setText(type);
-            etInput.setText(Constant.test_btc_tx_hash);//测试hash
+            etInput.setText(Constant.test_btc_tx_hash[position]);//测试hash
             if (popupWindow != null && popupWindow.isShowing()) {
                 popupWindow.dismiss();//关闭popupwindow窗口
             }
         });
-
+        try {
+            showInfo();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         //listView展示数据
         //① 确定要展示的数据内容
@@ -149,6 +159,139 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
         popupWindow.show();//将创建好的popupwindow展示出来。
 
+    }
+
+    private void showInfo() throws InterruptedException {
+        RequestParams params = new RequestParams(Constant.BASE_URL + Constant.INFO);
+        params.addHeader("Ok-Access-Key", Constant.API_KEY);
+        params.addParameter("chainShortName", Constant.TYPE_ARRAY[0]);
+        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                System.out.println(data_info.getChainFullName());
+                btc_tv_rank.setText(String.format("No.%s", data_info.getRank()));
+                btc_tv_height.setText(data_info.getLastHeight());
+                btc_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+        Thread.sleep(1000);
+        params.clearParams();
+        params.addParameter("chainShortName", Constant.TYPE_ARRAY[1]);
+        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                System.out.println(data_info.getChainFullName());
+                eth_tv_rank.setText(String.format("No.%s", data_info.getRank()));
+                eth_tv_height.setText(data_info.getLastHeight());
+                eth_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+        Thread.sleep(1000);
+        params.clearParams();
+        params.addParameter("chainShortName", Constant.TYPE_ARRAY[2]);
+        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                System.out.println(data_info.getChainFullName());
+                okc_tv_rank.setText(String.format("No.%s", data_info.getRank()));
+                okc_tv_height.setText(data_info.getLastHeight());
+                okc_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+        Thread.sleep(1000);
+        params.clearParams();
+        params.addParameter("chainShortName", Constant.TYPE_ARRAY[3]);
+        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                System.out.println(data_info.getChainFullName());
+                tron_tv_rank.setText(String.format("No.%s", data_info.getRank()));
+                tron_tv_height.setText(data_info.getLastHeight());
+                tron_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
+
+    private void back() {
+        if (alertDialog != null) {
+            alertDialog.dismiss();
+        }
+        this.finish();
+    }
+
+    private void searchError() {
+        alertDialog = new AlertDialog.Builder(this)
+                .setTitle("错误！")//标题
+                .setMessage("网络出错")//内容
+                .setPositiveButton("确定", (dialogInterface, i) -> back())
+                .create();
+        alertDialog.show();
     }
 
 

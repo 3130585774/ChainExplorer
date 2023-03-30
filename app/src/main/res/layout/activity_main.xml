@@ -18,7 +18,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/btc"
+        android:src="@drawable/logo"
         tools:ignore="ContentDescription" />
 
 
@@ -50,7 +50,7 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:paddingStart="15dp"
+            android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:text="BTC"
             android:textColor="@color/c_333333"
@@ -185,7 +185,7 @@
 
                 <TextView
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="最新出块时间"
@@ -337,7 +337,6 @@
                     android:orientation="vertical">
 
                     <TextView
-
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="OKC"
@@ -409,6 +408,7 @@
 
 
             </LinearLayout>
+
             <TextView
                 android:id="@+id/okc_tv_lastBlockTime"
                 android:layout_width="match_parent"
@@ -515,6 +515,7 @@
 
 
             </LinearLayout>
+
             <TextView
                 android:id="@+id/tron_tv_lastBlockTime"
                 android:layout_width="match_parent"

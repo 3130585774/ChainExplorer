@@ -74,13 +74,14 @@ public class TransactionDetailActivity extends AppCompatActivity {
         params.addHeader("Ok-Access-Key", Constant.API_KEY);
         params.addParameter("chainShortName", intent.getStringExtra("type"));
         params.addParameter("txid", intent.getStringExtra("txid"));
+        System.out.println(params);
         manager.get(params, new Callback.CommonCallback<org.json.JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
                 //网络请求成功时会调用该方法
                 Response response = Uitls.transaction_fills_praseRespone(result);
-                show_transaction_fills(response);
                 if (!Objects.equals(response.getCode(), "0")) searchError();
+                show_transaction_fills(response);
             }
 
             @Override
@@ -114,7 +115,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     }
 
     private void Iv_back() {
-        if (alertDialog!= null) {
+        if (alertDialog != null) {
             alertDialog.dismiss();
         }
         this.finish();
@@ -122,29 +123,34 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
     private void show_transaction_fills(Response transaction_fills) {
         Data data = transaction_fills.getData().get(0);
-        tv_logo_title.setText(data.getChainFullName());
-        tv_block_height.setText(data.getHeight());
-        tv_confirm.setText(data.getConfirm());
-        tv_transactionTime.setText(Uitls.TimestampToTime(data.getTransactionTime()));
-        tv_totalTransactionSize.setText(String.format("%s Byte", data.getTotalTransactionSize()));
-        tv_virtualSize.setText(String.format("%s Byte", data.getVirtualSize()));
-        tv_weight.setText(data.getWeight());
-//        tv_input.setText(data);\
-        Dictionary<String, Double> De = Uitls.CalculateTransaction(data.getInputDetails(), data.getOutputDetails());
-        tv_input.setText(String.format("%.8f %s", De.get("input"), data.getTransactionSymbol()));
-        tv_output.setText(String.format("%.8f %s", De.get("output"), data.getTransactionSymbol()));
-        tv_txfee.setText(data.getTxfee());
         String chainShortName = data.getChainShortName();
-        System.out.println(chainShortName);
-        System.out.println(chainShortName == "BTC");
         if (Objects.equals(chainShortName, "BTC")) iv_logo.setImageResource(R.drawable.btc_logo);
         if (Objects.equals(chainShortName, "ETH")) iv_logo.setImageResource(R.drawable.eth_logo);
         if (Objects.equals(chainShortName, "OCK")) iv_logo.setImageResource(R.drawable.okc_logo);
         if (Objects.equals(chainShortName, "TRON")) iv_logo.setImageResource(R.drawable.tron_logo);
+
+        tv_logo_title.setText(data.getChainFullName());
+        tv_block_height.setText(data.getHeight());
+        tv_confirm.setText(data.getConfirm());
+        tv_transactionTime.setText(Uitls.TimestampToTime(data.getTransactionTime()));
+        tv_totalTransactionSize.setText(Objects.equals(data.getTotalTransactionSize(), "") ? "-" : String.format("%s Byte", data.getTotalTransactionSize()));
+        tv_virtualSize.setText(Objects.equals(data.getVirtualSize(), "") ? "-" : String.format("%s Byte", data.getVirtualSize()));
+        tv_weight.setText(Objects.equals(data.getWeight(), "") ?"-":data.getWeight());
+        if (Objects.equals(chainShortName, "BTC")) {
+            Dictionary<String, Double> De = Uitls.CalculateTransaction(data.getInputDetails(), data.getOutputDetails());
+            tv_input.setText(String.format("%.8f %s", De.get("input"), data.getTransactionSymbol()));
+            tv_output.setText(String.format("%.8f %s", De.get("output"), data.getTransactionSymbol()));
+        } else {
+            tv_input.setText("-");
+            tv_output.setText("-");
+        }
+        tv_txfee.setText(data.getTxfee());
+
+
     }
 
     private void searchError() {
-        alertDialog =  new AlertDialog.Builder(this)
+        alertDialog = new AlertDialog.Builder(this)
                 .setTitle("错误！")//标题
                 .setMessage("查询失败")//内容
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
