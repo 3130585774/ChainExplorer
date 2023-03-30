@@ -18,7 +18,10 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Objects;
 
 
 @SuppressLint("NonConstantResourceId")
@@ -63,38 +66,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
             Iv_back();
         });
 
-        HttpManager manager = x.http();
-        RequestParams params = new RequestParams(Constant.BASE_URL + Constant.TRANSACTION);
-        params.addHeader("Ok-Access-Key", Constant.API_KEY);
-        params.addParameter("chainShortName", type);
-        params.addParameter("txid", hash);
 
-        manager.get(params, new Callback.CommonCallback<org.json.JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                //网络请求成功时会调用该方法
-                show_transaction_fills(transaction_fills_praseRespone(result));
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                //网络请求遇到错误时会调用该方法
-                System.out.println(ex);
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-                //当用户取消网络请求时，会调用该方法
-                System.out.println("cancelled");
-
-            }
-
-            @Override
-            public void onFinished() {
-                //网络请求结束时会调用该方法
-                System.out.println("over");
-            }
-        });
 
 
         //2、接收网络查询的结果
@@ -105,10 +77,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private void Iv_back(){
         this.finish();
     }
-    private Response transaction_fills_praseRespone(JSONObject result){
-        return JSON.parseObject(result.toString(),Response.class);
 
-    }
     private void show_transaction_fills(Response transaction_fills){
         Data data = transaction_fills.getData().get(0);
         tv_logo_title.setText(data.getChainFullName());
@@ -118,8 +87,18 @@ public class TransactionDetailActivity extends AppCompatActivity {
         tv_totalTransactionSize.setText(String.format("%s Byte", data.getTotalTransactionSize()));
         tv_virtualSize.setText(String.format("%s Byte", data.getVirtualSize()));
         tv_weight.setText(data.getWeight());
-//        tv_input.setText(data);
+//        tv_input.setText(data);\
+        Dictionary<String , Double> De = Uitls.CalculateTransaction(data.getInputDetails(),data.getOutputDetails());
+        tv_input.setText(String.format("%.8f %s",De.get("input"),data.getTransactionSymbol()));
+        tv_output.setText(String.format("%.8f %s",De.get("output"),data.getTransactionSymbol()));
         tv_txfee.setText(data.getTxfee());
+        String chainShortName = data.getChainShortName();
+        System.out.println(chainShortName);
+        System.out.println(chainShortName=="BTC");
+        if (Objects.equals(chainShortName, "BTC")) iv_logo.setImageResource(R.drawable.btc_logo);
+        if (Objects.equals(chainShortName, "ETH")) iv_logo.setImageResource(R.drawable.eth_logo);
+        if (Objects.equals(chainShortName, "OCK")) iv_logo.setImageResource(R.drawable.okc_logo);
+        if (Objects.equals(chainShortName, "TRON")) iv_logo.setImageResource(R.drawable.tron_logo);
     }
 
 }
