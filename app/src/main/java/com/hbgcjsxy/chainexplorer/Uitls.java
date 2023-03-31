@@ -79,6 +79,7 @@ public class Uitls {
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
+                System.out.println("result"+result);
                 //解析result
                 Message message = new Message();
                 message.obj = result;

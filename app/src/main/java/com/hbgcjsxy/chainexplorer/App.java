@@ -12,7 +12,7 @@ public class App extends Application {
         //配置xutils
         
         x.Ext.init(this);
-        x.Ext.setDebug(Constant.isDebug);
+        x.Ext.setDebug(!Constant.isDebug);
 
     }
 }
