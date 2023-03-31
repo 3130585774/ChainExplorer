@@ -67,15 +67,15 @@ public class Uitls {
         int fail = 1;
         RequestParams params = new RequestParams(url);
         params.addHeader("Ok-Access-Key", Constant.API_KEY);
-//        for (Map.Entry<String, String> entry : parameters.entrySet()) {
-//
-//            String key = entry.getKey();
-//            String value = entry.getValue();
-//            System.out.println(key + value);
-//            params.addParameter(key.trim(), value.trim());
-//        }
-        params.addParameter("chainShortName", "BTC");
-        params.addParameter("height","783306" );
+        for (Map.Entry<String, String> entry : parameters.entrySet()) {
+
+            String key = entry.getKey();
+            String value = entry.getValue();
+            System.out.println(key + value);
+            params.addParameter(key.trim(), value.trim());
+        }
+//        params.addParameter("chainShortName", "BTC");
+//        params.addParameter("height","783306" );
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {

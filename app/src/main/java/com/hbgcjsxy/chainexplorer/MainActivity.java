@@ -6,10 +6,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
@@ -77,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
     @ViewInject(R.id.tron_tv_lastBlockTime)
     private TextView tron_tv_lastBlockTime;
-
+    @ViewInject(R.id.iv_btc_block)
+    private ImageView btc_block;
     //列表选项的window
     private ListPopupWindow popupWindow;
     private AlertDialog alertDialog;
@@ -123,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
                 popupWindow.dismiss();//关闭popupwindow窗口
             }
         });
+        btc_block.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openBlockTransactionsList();
+
+            }
+        });
         try {
             showInfo();
         } catch (InterruptedException e) {
@@ -135,6 +146,16 @@ public class MainActivity extends AppCompatActivity {
         //② 确定展示的模板（布局样式）
         //布局样式：TextView
         //③ 把数据设置到模板上
+    }
+    private void openBlockTransactionsList() {
+        // TODO: 2023/3/28 根据用户的选择和输入内容，查询区块链中的交易详情信息，并展示出来
+//        ResponseSerializable responseSerializable = new ResponseSerializable();
+        Intent intent = new Intent(this, BlockTransactionsList.class);
+//        intent.putExtra("type", tvType.getText().toString().trim());
+//        intent.putExtra("txid", etInput.getText().toString().trim());
+        //携带数据进行跳转
+        startActivity(intent);
+
     }
 
     /**

@@ -2,6 +2,7 @@ package com.hbgcjsxy.chainexplorer;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -30,11 +31,13 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.hbgcjsxy.chainexplorer", appContext.getPackageName());
         System.out.println(GetBlockTransactionList());
+        System.out.println("123123");
+
     }
     private JSONObject GetBlockTransactionList() {
         final JSONObject[] jsonObject = {null};
         RequestParams params = new RequestParams();
-        Handler handler = new Handler(){
+        Handler handler = new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -48,4 +51,5 @@ public class ExampleInstrumentedTest {
         Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKTRANSACTIONLIST,parameters);
         return jsonObject[0];
     }
+
 }
