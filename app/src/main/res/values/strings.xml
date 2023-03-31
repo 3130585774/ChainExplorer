@@ -11,4 +11,6 @@
     <string name="txfee">手续费</string>
     <string name="totalTransactionSize">总交易大小</string>
     <string name="back">返回</string>
+    <string name="school">河北工程技术学院</string>
+    <string name="app_name_english">ChainExplorer</string>
 </resources>

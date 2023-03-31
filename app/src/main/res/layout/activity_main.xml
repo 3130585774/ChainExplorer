@@ -92,10 +92,10 @@
         android:layout_marginTop="70dp"
         android:layout_marginEnd="5dp"
         android:columnCount="2"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <LinearLayout
-
+            android:id="@+id/btc_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:orientation="vertical"
@@ -205,7 +205,7 @@
         </LinearLayout>
 
         <LinearLayout
-
+            android:id="@+id/eth_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:orientation="vertical"
@@ -314,7 +314,7 @@
         </LinearLayout>
 
         <LinearLayout
-
+            android:id="@+id/okc_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:orientation="vertical"
@@ -420,7 +420,7 @@
         </LinearLayout>
 
         <LinearLayout
-
+            android:id="@+id/tron_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:orientation="vertical"
