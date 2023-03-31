@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ChainExplorer"
         tools:targetApi="31">
         <activity
-            android:name=".Rlockchaindetails"
+            android:name=".BlockTransactionsList"
             android:exported="false" />
         <activity
             android:name=".TransactionDetailActivity"

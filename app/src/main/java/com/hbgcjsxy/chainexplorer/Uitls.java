@@ -1,6 +1,8 @@
 package com.hbgcjsxy.chainexplorer;
 
 import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.os.Message;
 
 import com.alibaba.fastjson.JSON;
 
@@ -16,6 +18,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Uitls {
     public static String TimestampToTime(String timeStampStr) {
@@ -51,5 +54,54 @@ public class Uitls {
     public static ResponseInfo info_praseRespone(JSONObject result) {
         return JSON.parseObject(result.toString(), ResponseInfo.class);
 
+    }
+
+    /**
+     * http get请求工具
+     *
+     * @param mHandler 回调
+     * @param url      网址
+     */
+    public static void HttpsGetX(final Handler mHandler, String url, Map<String, String> parameters) {
+        int mWhat = 0;
+        int fail = 1;
+        RequestParams params = new RequestParams(url);
+        params.addHeader("Ok-Access-Key", Constant.API_KEY);
+//        for (Map.Entry<String, String> entry : parameters.entrySet()) {
+//
+//            String key = entry.getKey();
+//            String value = entry.getValue();
+//            System.out.println(key + value);
+//            params.addParameter(key.trim(), value.trim());
+//        }
+        params.addParameter("chainShortName", "BTC");
+        params.addParameter("height","783306" );
+        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                //解析result
+                Message message = new Message();
+                message.obj = result;
+                message.what = mWhat;
+                mHandler.sendMessage(message);
+            }
+
+            //请求异常后的回调方法
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                ex.printStackTrace();
+                mHandler.sendEmptyMessage(fail);
+            }
+
+            //主动调用取消请求的回调方法
+            @Override
+            public void onCancelled(CancelledException cex) {
+                cex.printStackTrace();
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
     }
 }
