@@ -124,9 +124,10 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private void show_transaction_fills(Response transaction_fills) {
         Data data = transaction_fills.getData().get(0);
         String chainShortName = data.getChainShortName();
+        System.out.println(chainShortName);
         if (Objects.equals(chainShortName, "BTC")) iv_logo.setImageResource(R.drawable.btc_logo);
         if (Objects.equals(chainShortName, "ETH")) iv_logo.setImageResource(R.drawable.eth_logo);
-        if (Objects.equals(chainShortName, "OKC")) iv_logo.setImageResource(R.drawable.okc_logo);
+        if (Objects.equals(chainShortName, "OKTC")) iv_logo.setImageResource(R.drawable.okc_logo);
         if (Objects.equals(chainShortName, "TRON")) iv_logo.setImageResource(R.drawable.tron_logo);
 
         tv_logo_title.setText(data.getChainFullName());
