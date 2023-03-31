@@ -20,6 +20,7 @@ public class Rlockchaindetails extends AppCompatActivity {
     }
 
     private void initView() {
-    //TODO 详情
+        //TODO 详情
     }
+
 }
