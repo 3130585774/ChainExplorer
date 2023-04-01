@@ -8,7 +8,7 @@ public class ResponseBlockList {
 
     private String msg;
 
-    private List<Data> data;
+    private List<Data_BlockList> data;
 
     public void setCode(String code) {
         this.code = code;
@@ -26,11 +26,11 @@ public class ResponseBlockList {
         return this.msg;
     }
 
-    public void setData(List<Data> data) {
+    public void setData(List<Data_BlockList> data) {
         this.data = data;
     }
 
-    public List<Data> getData() {
+    public List<Data_BlockList> getData() {
         return this.data;
     }
 }

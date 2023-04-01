@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import java.util.LinkedList;
 
 public class BlockListAdapter extends BaseAdapter {
-    private LinkedList<Blocklist> blocklist;
+    private LinkedList<BlockList> blocklist;
 
     @Override
     public int getCount() {

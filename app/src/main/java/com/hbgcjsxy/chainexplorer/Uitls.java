@@ -28,6 +28,14 @@ public class Uitls {
         System.out.println(timeStamp);
         return date;
     }
+    public static String TimestampToTimeShort(String timeStampStr) {
+        Long timeStamp = Long.parseLong(timeStampStr);
+        @SuppressLint("SimpleDateFormat")
+        String date = new SimpleDateFormat("MM-dd HH:mm", Locale.CHINA).format(new Date(timeStamp));
+        System.out.println(date);
+        System.out.println(timeStamp);
+        return date;
+    }
 
     public static Dictionary<String, Double> CalculateTransaction(List<InputDetails> inputDetails, List<OutputDetails> outputDetails) {
         //TODO 计算交易输入输出
@@ -54,7 +62,10 @@ public class Uitls {
         return JSON.parseObject(result.toString(), ResponseInfo.class);
 
     }
+    public static ResponseBlockList blockListParseRespond(JSONObject result) {
+        return JSON.parseObject(result.toString(), ResponseBlockList.class);
 
+    }
 
     /**
      * http get请求工具
@@ -79,7 +90,7 @@ public class Uitls {
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                System.out.println("result"+result);
+                System.out.println("result" + result);
                 //解析result
                 Message message = new Message();
                 message.obj = result;
