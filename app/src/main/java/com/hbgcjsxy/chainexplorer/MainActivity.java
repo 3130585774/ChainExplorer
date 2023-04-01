@@ -2,11 +2,8 @@ package com.hbgcjsxy.chainexplorer;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,10 +23,6 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 @SuppressLint("NonConstantResourceId")
 @ContentView(R.layout.activity_main)
@@ -189,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 btc_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 btc_tv_height.setText(data_info.getLastHeight());
@@ -217,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 eth_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 eth_tv_height.setText(data_info.getLastHeight());
@@ -245,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 okc_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 okc_tv_height.setText(data_info.getLastHeight());
@@ -273,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_praseRespone(result).getData().get(0);
+                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 tron_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 tron_tv_height.setText(data_info.getLastHeight());

@@ -7,7 +7,6 @@ import android.os.Message;
 import com.alibaba.fastjson.JSON;
 
 import org.json.JSONObject;
-import org.xutils.HttpManager;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -46,15 +45,16 @@ public class Uitls {
         return re;
     }
 
-    public static Response transaction_fills_praseRespone(JSONObject result) {
+    public static Response transactionFillsParseRespond(JSONObject result) {
         return JSON.parseObject(result.toString(), Response.class);
 
     }
 
-    public static ResponseInfo info_praseRespone(JSONObject result) {
+    public static ResponseInfo info_parseRespond(JSONObject result) {
         return JSON.parseObject(result.toString(), ResponseInfo.class);
 
     }
+
 
     /**
      * http get请求工具

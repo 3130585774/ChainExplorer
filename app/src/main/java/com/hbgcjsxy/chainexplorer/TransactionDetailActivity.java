@@ -4,15 +4,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.alibaba.fastjson.JSON;
 
 import org.json.JSONObject;
 import org.xutils.HttpManager;
@@ -23,8 +19,6 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -79,7 +73,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject result) {
                 //网络请求成功时会调用该方法
-                Response response = Uitls.transaction_fills_praseRespone(result);
+                Response response = Uitls.transactionFillsParseRespond(result);
                 if (!Objects.equals(response.getCode(), "0")) searchError();
                 show_transaction_fills(response);
             }

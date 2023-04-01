@@ -42,6 +42,7 @@ public class BlockTransactionsList extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 JSONObject jsonObject = (JSONObject) msg.obj;
+
             }
         };
         Map<String, String> parameters = new HashMap<String, String>();
@@ -50,8 +51,8 @@ public class BlockTransactionsList extends AppCompatActivity {
         Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKTRANSACTIONLIST, parameters);
     }
 
-    private void showBlockList(Blocklist blocklist) {
-        
+    private void showBlockList(BlockList blocklist) {
+
     }
 
 }
