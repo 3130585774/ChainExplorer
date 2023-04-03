@@ -3,6 +3,7 @@ package com.hbgcjsxy.chainexplorer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,7 +25,6 @@ import java.util.Map;
 public class BlockTransactionsList extends AppCompatActivity {
     @ViewInject(R.id.block_list)
     private ListView block_list;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,26 +33,32 @@ public class BlockTransactionsList extends AppCompatActivity {
     }
 
     private void initView() {
+        Intent intent = getIntent();
         //TODO 详情
-
+        GetBlockTransactionList(intent);
     }
 
-    private void GetBlockTransactionList() {
+    private void GetBlockTransactionList(Intent intent) {
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 JSONObject jsonObject = (JSONObject) msg.obj;
+                System.out.println(msg.obj);
                 showBlockList(Uitls.blockListParseRespond(jsonObject).getData().get(0).getBlockList());
+
             }
         };
         Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("chainShortName", "BTC");
-        parameters.put("height", "783306");
-        Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKTRANSACTIONLIST, parameters);
+        parameters.put("chainShortName", intent.getStringExtra("type"));
+        parameters.put("limit","50");
+        Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKLIST, parameters);
     }
 
     private void showBlockList(List<BlockList> blocklist) {
+        System.out.println(blocklist.get(0).getBlockTime());
+        BlockListAdapter blockListAdapter = new BlockListAdapter(BlockTransactionsList.this,R.layout.block_item,blocklist);
+        block_list.setAdapter(blockListAdapter);
 
     }
 

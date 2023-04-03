@@ -48,7 +48,7 @@ public class ExampleInstrumentedTest {
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("chainShortName", "BTC");
         parameters.put("height","783306");
-        Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKTRANSACTIONLIST,parameters);
+        Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKLIST,parameters);
         return jsonObject[0];
     }
 

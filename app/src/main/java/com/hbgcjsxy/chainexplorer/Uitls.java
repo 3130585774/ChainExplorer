@@ -79,7 +79,6 @@ public class Uitls {
 
             String key = entry.getKey();
             String value = entry.getValue();
-            System.out.println(key + value);
             params.addParameter(key.trim(), value.trim());
         }
 //        params.addParameter("chainShortName", "BTC");

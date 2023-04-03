@@ -59,6 +59,9 @@ public class BlockList
     public String getBlockTime(){
         return this.blockTime;
     }
+    public String getBlockTimeFormat(){
+        return Uitls.TimestampToTimeShort(this.blockTime);
+    }
     public void setTxnCount(String txnCount){
         this.txnCount = txnCount;
     }
