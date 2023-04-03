@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -24,6 +26,7 @@ import java.util.Map;
 public class TransactionsListActivity extends AppCompatActivity {
     @ViewInject(R.id.transaction_list)
     private ListView transactions_list;
+    private List<TransactionList> transactionLists;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +36,14 @@ public class TransactionsListActivity extends AppCompatActivity {
 
     private void initView() {
         Intent intent = getIntent();
+        Intent intentout = new Intent(this,TransactionDetailActivity.class);
         //TODO 详情
         GetBlockTransactionList(intent);
+        transactions_list.setOnItemClickListener((adapterView, view, i, l) -> {
+            intentout.putExtra("type", intent.getStringExtra("type"));
+            intentout.putExtra("txid", transactionLists.get(i).getTxid());
+            startActivity(intentout);
+        });
     }
 
     private void GetBlockTransactionList(Intent intent) {
@@ -43,15 +52,15 @@ public class TransactionsListActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 JSONObject jsonObject = (JSONObject) msg.obj;
-                System.out.println(msg.obj);
-                showBlockList(Uitls.transactionParseRespond(jsonObject).getData().get(0).getTransactionList());
+                transactionLists = Uitls.transactionParseRespond(jsonObject).getData().get(0).getTransactionList();
+                showBlockList(transactionLists);
 
             }
         };
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
         parameters.put("chainShortName", intent.getStringExtra("type"));
         parameters.put("height", intent.getStringExtra("height"));
-        parameters.put("limit","50");
+        parameters.put("limit","30");
         Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.TRANSACTIONLIST, parameters);
     }
 

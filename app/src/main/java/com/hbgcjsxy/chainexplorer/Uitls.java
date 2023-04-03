@@ -66,11 +66,13 @@ public class Uitls {
         return JSON.parseObject(result.toString(), ResponseTransaction.class);
     }
 
+
     /**
      * http get请求工具
      *
      * @param mHandler 回调
      * @param url      网址
+     * @param parameters 参数字典
      */
     public static void HttpsGetX(final Handler mHandler, String url, Map<String, String> parameters) {
         int mWhat = 0;

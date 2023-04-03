@@ -5,8 +5,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,11 +21,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressLint("NonConstantResourceId")
 @ContentView(R.layout.activity_main)
@@ -84,13 +87,12 @@ public class MainActivity extends AppCompatActivity {
     private ImageView tron_block;
     //列表选项的window
     private ListPopupWindow popupWindow;
-    private AlertDialog alertDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //使用xutils库初始化
+        //使用X_utils库初始化
         x.view().inject(this);
         initView();
 
@@ -105,7 +107,12 @@ public class MainActivity extends AppCompatActivity {
         //设置输入框后面的按钮的点击事件
         btnSearch.setOnClickListener(view -> {
             //当用户点击输入框后面的向右的箭头区域时，程序会到此处执行
-            openTransactionPage();
+            if (!(etInput.getText().toString().trim().equals(""))) {
+                openTransactionPage();
+            } else {
+                setAlertDialog(this);
+            }
+
         });
 
         //对要展示的popupwindow进行初始化
@@ -113,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         //Android中默认实现了一个简单的Adapter,比如：ArrayAdapter
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.item_popupwindow, Constant.TYPE_ARRAY);
         popupWindow.setAdapter(adapter);
-
         //尺寸
         popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -131,12 +137,7 @@ public class MainActivity extends AppCompatActivity {
         eth_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[1]));
         okc_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[2]));
         tron_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[3]));
-        try {
-            showInfo();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        showInfo();
         //listView展示数据
         //① 确定要展示的数据内容
         //BTC、ETH、LTC
@@ -144,8 +145,9 @@ public class MainActivity extends AppCompatActivity {
         //布局样式：TextView
         //③ 把数据设置到模板上
     }
-    private void openBlockTransactionsList(String  type) {
-        Intent intent = new Intent(this, BlockTransactionsList.class);
+
+    private void openBlockTransactionsList(String type) {
+        Intent intent = new Intent(this, BlockTransactionsListActivity.class);
         intent.putExtra("type", type);
         //携带数据进行跳转
         startActivity(intent);
@@ -176,135 +178,77 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showInfo() throws InterruptedException {
-        RequestParams params = new RequestParams(Constant.BASE_URL + Constant.INFO);
-        params.addHeader("Ok-Access-Key", Constant.API_KEY);
-        params.addParameter("chainShortName", Constant.TYPE_ARRAY[0]);
-        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
+    private void showInfo() {
+        Handler btcHandler = new Handler(Looper.getMainLooper()) {
             @Override
-            public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                JSONObject jsonObject = (JSONObject) msg.obj;
+                Data_info data_info = Uitls.info_parseRespond(jsonObject).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 btc_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 btc_tv_height.setText(data_info.getLastHeight());
                 btc_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
 
             }
-
+        };
+        Handler ethHandler = new Handler(Looper.getMainLooper()) {
             @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-        Thread.sleep(1000);
-        params.clearParams();
-        params.addParameter("chainShortName", Constant.TYPE_ARRAY[1]);
-        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                JSONObject jsonObject = (JSONObject) msg.obj;
+                Data_info data_info = Uitls.info_parseRespond(jsonObject).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 eth_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 eth_tv_height.setText(data_info.getLastHeight());
                 eth_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
 
             }
-
+        };
+        Handler okcHandler = new Handler(Looper.getMainLooper()) {
             @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-        Thread.sleep(1000);
-        params.clearParams();
-        params.addParameter("chainShortName", Constant.TYPE_ARRAY[2]);
-        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                JSONObject jsonObject = (JSONObject) msg.obj;
+                Data_info data_info = Uitls.info_parseRespond(jsonObject).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 okc_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 okc_tv_height.setText(data_info.getLastHeight());
                 okc_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
             }
-
+        };
+        Handler tronHandler = new Handler(Looper.getMainLooper()) {
             @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-        Thread.sleep(1000);
-        params.clearParams();
-        params.addParameter("chainShortName", Constant.TYPE_ARRAY[3]);
-        x.http().get(params, new Callback.CommonCallback<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                Data_info data_info = Uitls.info_parseRespond(result).getData().get(0);
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                JSONObject jsonObject = (JSONObject) msg.obj;
+                Data_info data_info = Uitls.info_parseRespond(jsonObject).getData().get(0);
                 System.out.println(data_info.getChainFullName());
                 tron_tv_rank.setText(String.format("No.%s", data_info.getRank()));
                 tron_tv_height.setText(data_info.getLastHeight());
                 tron_tv_lastBlockTime.setText(Uitls.TimestampToTime(data_info.getLastBlockTime()));
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
 
             }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-
+        };
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("chainShortName", Constant.TYPE_ARRAY[0]);
+        Uitls.HttpsGetX(btcHandler, Constant.BASE_URL + Constant.INFO, parameters);
+        parameters.put("chainShortName", Constant.TYPE_ARRAY[1]);
+        Uitls.HttpsGetX(ethHandler, Constant.BASE_URL + Constant.INFO, parameters);
+        parameters.put("chainShortName", Constant.TYPE_ARRAY[2]);
+        Uitls.HttpsGetX(okcHandler, Constant.BASE_URL + Constant.INFO, parameters);
+        parameters.put("chainShortName", Constant.TYPE_ARRAY[3]);
+        Uitls.HttpsGetX(tronHandler, Constant.BASE_URL + Constant.INFO, parameters);
     }
 
-
-    private void back() {
-        if (alertDialog != null) {
-            alertDialog.dismiss();
-        }
-        this.finish();
-    }
-
-    private void searchError(Context constext, String info) {
-        alertDialog = new AlertDialog.Builder(constext)
+    private void setAlertDialog(Context constext) {
+        //标题
+        //内容
+        AlertDialog alertDialog = new AlertDialog.Builder(constext)
                 .setTitle("错误！")//标题
-                .setMessage(info)//内容
-                .setPositiveButton("确定", (dialogInterface, i) -> back())
+                .setMessage("请输入交易地址")//内容
+                .setPositiveButton("确定", (dialogInterface, i) -> {
+                })
                 .create();
         alertDialog.show();
     }

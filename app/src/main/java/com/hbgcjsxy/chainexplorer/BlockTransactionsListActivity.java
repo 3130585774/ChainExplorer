@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONObject;
-import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -24,7 +21,7 @@ import java.util.Map;
 
 @SuppressLint("NonConstantResourceId")
 @ContentView(R.layout.activity_blockchaindetails)
-public class BlockTransactionsList extends AppCompatActivity {
+public class BlockTransactionsListActivity extends AppCompatActivity {
     @ViewInject(R.id.block_list)
     private ListView block_list;
     private  List<BlockList> blockList;
@@ -54,14 +51,13 @@ public class BlockTransactionsList extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 JSONObject jsonObject = (JSONObject) msg.obj;
-                System.out.println(msg.obj);
                 blockList = Uitls.blockListParseRespond(jsonObject).getData().get(0).getBlockList();
                 showBlockList(blockList);
 
             }
 
         };
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
         parameters.put("chainShortName", intent.getStringExtra("type"));
         parameters.put("limit", "50");
         Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKLIST, parameters);
@@ -69,7 +65,7 @@ public class BlockTransactionsList extends AppCompatActivity {
 
     private void showBlockList(List<BlockList> blocklist) {
         System.out.println(blocklist.get(0).getBlockTime());
-        BlockListAdapter blockListAdapter = new BlockListAdapter(BlockTransactionsList.this, R.layout.block_item, blocklist);
+        BlockListAdapter blockListAdapter = new BlockListAdapter(BlockTransactionsListActivity.this, R.layout.block_item, blocklist);
         block_list.setAdapter(blockListAdapter);
 
     }

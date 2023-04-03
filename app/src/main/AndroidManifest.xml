@@ -18,7 +18,7 @@
             android:name=".TransactionsListActivity"
             android:exported="false" />
         <activity
-            android:name=".BlockTransactionsList"
+            android:name=".BlockTransactionsListActivity"
             android:exported="false" />
         <activity
             android:name=".TransactionDetailActivity"
