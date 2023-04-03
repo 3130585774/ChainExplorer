@@ -61,7 +61,9 @@ public class Uitls {
     }
     public static ResponseBlockList blockListParseRespond(JSONObject result) {
         return JSON.parseObject(result.toString(), ResponseBlockList.class);
-
+    }
+    public static ResponseTransaction transactionParseRespond(JSONObject result) {
+        return JSON.parseObject(result.toString(), ResponseTransaction.class);
     }
 
     /**

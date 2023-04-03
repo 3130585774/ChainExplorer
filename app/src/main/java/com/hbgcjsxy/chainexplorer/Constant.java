@@ -16,6 +16,7 @@ public class Constant {
     public static final String TRANSACTION = "api/v5/explorer/transaction/transaction-fills";
     public static final String INFO = "api/v5/explorer/blockchain/info";
     public static final String BLOCKLIST = "api/v5/explorer/block/block-list";
+    public static final String TRANSACTIONLIST ="api/v5/explorer/transaction/transaction-list";
     public static final boolean isDebug = true;
 
     public static final String[] TYPE_ARRAY = {"BTC", "ETH", "OKC", "TRON"};

@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONObject;
-import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -23,12 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressLint("NonConstantResourceId")
-@ContentView(R.layout.activity_blockchaindetails)
-public class BlockTransactionsList extends AppCompatActivity {
-    @ViewInject(R.id.block_list)
-    private ListView block_list;
-    private  List<BlockList> blockList;
-
+@ContentView(R.layout.activity_transactions_list)
+public class TransactionsListActivity extends AppCompatActivity {
+    @ViewInject(R.id.transaction_list)
+    private ListView transactions_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +33,8 @@ public class BlockTransactionsList extends AppCompatActivity {
 
     private void initView() {
         Intent intent = getIntent();
-        Intent intentout = new Intent(this, TransactionsListActivity.class);
         //TODO 详情
         GetBlockTransactionList(intent);
-        block_list.setOnItemClickListener((adapterView, view, i, l) -> {
-            intentout.putExtra("type", intent.getStringExtra("type"));
-            intentout.putExtra("height", blockList.get(i).getHeight());
-            startActivity(intentout);
-        });
     }
 
     private void GetBlockTransactionList(Intent intent) {
@@ -55,22 +44,20 @@ public class BlockTransactionsList extends AppCompatActivity {
                 super.handleMessage(msg);
                 JSONObject jsonObject = (JSONObject) msg.obj;
                 System.out.println(msg.obj);
-                blockList = Uitls.blockListParseRespond(jsonObject).getData().get(0).getBlockList();
-                showBlockList(blockList);
+                showBlockList(Uitls.transactionParseRespond(jsonObject).getData().get(0).getTransactionList());
 
             }
-
         };
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("chainShortName", intent.getStringExtra("type"));
-        parameters.put("limit", "50");
-        Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.BLOCKLIST, parameters);
+        parameters.put("height", intent.getStringExtra("height"));
+        parameters.put("limit","50");
+        Uitls.HttpsGetX(handler, Constant.BASE_URL + Constant.TRANSACTIONLIST, parameters);
     }
 
-    private void showBlockList(List<BlockList> blocklist) {
-        System.out.println(blocklist.get(0).getBlockTime());
-        BlockListAdapter blockListAdapter = new BlockListAdapter(BlockTransactionsList.this, R.layout.block_item, blocklist);
-        block_list.setAdapter(blockListAdapter);
+    private void showBlockList(List<TransactionList> transactionLists) {
+        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(TransactionsListActivity.this,R.layout.transactions_item,transactionLists);
+        transactions_list.setAdapter(transactionsAdapter);
 
     }
 
