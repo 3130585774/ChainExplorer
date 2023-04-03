@@ -3,14 +3,11 @@ package com.hbgcjsxy.chainexplorer;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
-
 import com.alibaba.fastjson.JSON;
-
 import org.json.JSONObject;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Dictionary;
@@ -97,20 +94,17 @@ public class Uitls {
                 message.what = mWhat;
                 mHandler.sendMessage(message);
             }
-
             //请求异常后的回调方法
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 ex.printStackTrace();
                 mHandler.sendEmptyMessage(fail);
             }
-
             //主动调用取消请求的回调方法
             @Override
             public void onCancelled(CancelledException cex) {
                 cex.printStackTrace();
             }
-
             @Override
             public void onFinished() {
             }
