@@ -2,6 +2,7 @@ package com.hbgcjsxy.chainexplorer;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -75,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView tron_tv_lastBlockTime;
     @ViewInject(R.id.iv_btc_block)
     private ImageView btc_block;
+    @ViewInject(R.id.iv_eth_block)
+    private ImageView eth_block;
+    @ViewInject(R.id.iv_okc_block)
+    private ImageView okc_block;
+    @ViewInject(R.id.iv_tron_block)
+    private ImageView tron_block;
     //列表选项的window
     private ListPopupWindow popupWindow;
     private AlertDialog alertDialog;
@@ -120,13 +127,10 @@ public class MainActivity extends AppCompatActivity {
                 popupWindow.dismiss();//关闭popupwindow窗口
             }
         });
-        btc_block.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openBlockTransactionsList();
-
-            }
-        });
+        btc_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[0]));
+        eth_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[1]));
+        okc_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[2]));
+        tron_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[3]));
         try {
             showInfo();
         } catch (InterruptedException e) {
@@ -140,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
         //布局样式：TextView
         //③ 把数据设置到模板上
     }
-    private void openBlockTransactionsList() {
+    private void openBlockTransactionsList(String  type) {
         Intent intent = new Intent(this, BlockTransactionsList.class);
-        intent.putExtra("type", tvType.getText().toString().trim());
+        intent.putExtra("type", type);
         //携带数据进行跳转
         startActivity(intent);
 
@@ -296,10 +300,10 @@ public class MainActivity extends AppCompatActivity {
         this.finish();
     }
 
-    private void searchError() {
-        alertDialog = new AlertDialog.Builder(this)
+    private void searchError(Context constext, String info) {
+        alertDialog = new AlertDialog.Builder(constext)
                 .setTitle("错误！")//标题
-                .setMessage("网络出错")//内容
+                .setMessage(info)//内容
                 .setPositiveButton("确定", (dialogInterface, i) -> back())
                 .create();
         alertDialog.show();
