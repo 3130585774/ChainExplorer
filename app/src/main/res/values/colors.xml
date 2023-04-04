@@ -22,5 +22,6 @@
     <color name="c_ff666a">#FF666A</color>
     <color name="c_loading_color">#661e212b</color>
     <color name="TRANSPARENT">#00000000</color>
+    <color name="whitefont">#FFFFFF</color>
 
 </resources>

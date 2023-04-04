@@ -33,6 +33,14 @@ public class Uitls {
         System.out.println(timeStamp);
         return date;
     }
+    public static String TimestampToVeryTimeShort(String timeStampStr) {
+        Long timeStamp = Long.parseLong(timeStampStr);
+        @SuppressLint("SimpleDateFormat")
+        String date = new SimpleDateFormat("HH:mm", Locale.CHINA).format(new Date(timeStamp));
+        System.out.println(date);
+        System.out.println(timeStamp);
+        return date;
+    }
 
     public static Dictionary<String, Double> CalculateTransaction(List<InputDetails> inputDetails, List<OutputDetails> outputDetails) {
         //TODO 计算交易输入输出
@@ -90,7 +98,7 @@ public class Uitls {
         x.http().get(params, new Callback.CommonCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                System.out.println("result" + result);
+//                System.out.println("result" + result);
                 //解析result
                 Message message = new Message();
                 message.obj = result;

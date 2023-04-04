@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".BlockTransactionsListActivity"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp"
+    android:background="@color/c_159ee2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +19,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:text="交易Hash"
-            android:textColor="@color/black"
+            android:text="交易列表"
+            android:textColor="@color/c_f0f0f0"
             android:textSize="20sp"
             tools:ignore="HardcodedText"/>
 

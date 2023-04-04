@@ -147,7 +147,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private void searchError() {
         alertDialog = new AlertDialog.Builder(this)
                 .setTitle("错误！")//标题
-                .setMessage("查询失败")//内容
+                .setMessage("查询失败\n请检查地址是否正确")//内容
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

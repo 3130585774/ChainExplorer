@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c_333333"
+    android:background="@color/c_159ee2"
     android:orientation="vertical"
 
     android:paddingTop="20dp">
@@ -78,18 +78,18 @@
         <!--向右的箭头-->
         <Button
             android:id="@+id/btn_search"
-            android:layout_width="26dp"
-            android:layout_height="15dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="15dp"
-            android:background="@mipmap/ic_arrow_right"
+            android:background="@drawable/go"
             tools:ignore="RtlHardcoded,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </LinearLayout>
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="356dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="5dp"
         android:columnCount="2"
         android:padding="5dp">
@@ -98,6 +98,7 @@
             android:id="@+id/btc_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:clickable="true"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -111,7 +112,8 @@
                     android:id="@+id/iv_btc_block"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/btc_logo" />
+                    android:src="@drawable/btc_logo"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -143,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="市值排名"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/btc_tv_rank"
@@ -153,7 +155,7 @@
                     android:text="No.1"
                     android:textAlignment="textEnd"
 
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/whitefont" />
             </LinearLayout>
 
             <LinearLayout
@@ -167,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="区块高度"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/btc_tv_height"
@@ -176,7 +178,7 @@
                     android:layout_weight="1"
                     android:text="783152"
                     android:textAlignment="textEnd"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/whitefont" />
             </LinearLayout>
 
             <LinearLayout
@@ -190,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="最新出块时间"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
 
             </LinearLayout>
@@ -203,12 +205,14 @@
                 android:text="2023年03月30 16:28"
                 android:textAlignment="textEnd"
                 android:textColor="#FFFFFF" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/eth_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:clickable="true"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -234,7 +238,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="ETH"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/whitefont"
                         android:textSize="30sp" />
 
                 </LinearLayout>
@@ -253,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="市值排名"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/eth_tv_rank"
@@ -263,7 +267,7 @@
                     android:text="No.2"
                     android:textAlignment="textEnd"
 
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/whitefont" />
             </LinearLayout>
 
             <LinearLayout
@@ -277,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="区块高度"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/eth_tv_height"
@@ -300,7 +304,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="最新出块时间"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
 
             </LinearLayout>
@@ -319,6 +323,7 @@
             android:id="@+id/okc_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:clickable="true"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -361,7 +366,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="市值排名"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/okc_tv_rank"
@@ -384,7 +389,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="区块高度"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/okc_tv_height"
@@ -407,7 +412,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="最新出块时间"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
 
             </LinearLayout>
@@ -426,6 +431,7 @@
             android:id="@+id/tron_block"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:clickable="true"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -469,7 +475,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="市值排名"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/tron_tv_rank"
@@ -492,7 +498,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="区块高度"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
                 <TextView
                     android:id="@+id/tron_tv_height"
@@ -515,7 +521,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="最新出块时间"
-                    android:textColor="#BBBBBB" />
+                    android:textColor="@color/whitefont" />
 
 
             </LinearLayout>

@@ -23,7 +23,9 @@ public class TransactionsAdapter extends ArrayAdapter<TransactionList> {
         TransactionList transactionList = getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(R.layout.transactions_item,parent,false);
         TextView transaction_hash = view.findViewById(R.id.transaction_hash);
-        transaction_hash.setText(transactionList.getTxid());
+        TextView transaction_info = view.findViewById(R.id.transaction_info);
+        transaction_hash.setText(String.format("%s...%s", transactionList.getTxid().substring(0, 6), transactionList.getTxid().substring(transactionList.getTxid().length()-4)));
+        transaction_info.setText(String.format("%s %s", transactionList.getAmount(), transactionList.getTransactionSymbol()));
         return view;
     }
 }

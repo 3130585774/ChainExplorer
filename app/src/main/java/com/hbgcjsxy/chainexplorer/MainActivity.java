@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
@@ -77,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
     @ViewInject(R.id.tron_tv_lastBlockTime)
     private TextView tron_tv_lastBlockTime;
-    @ViewInject(R.id.iv_btc_block)
-    private ImageView btc_block;
-    @ViewInject(R.id.iv_eth_block)
-    private ImageView eth_block;
-    @ViewInject(R.id.iv_okc_block)
-    private ImageView okc_block;
-    @ViewInject(R.id.iv_tron_block)
-    private ImageView tron_block;
+    @ViewInject(R.id.btc_block)
+    private LinearLayout btc_block;
+    @ViewInject(R.id.eth_block)
+    private LinearLayout eth_block;
+    @ViewInject(R.id.okc_block)
+    private LinearLayout okc_block;
+    @ViewInject(R.id.tron_block)
+    private LinearLayout tron_block;
     //列表选项的window
     private ListPopupWindow popupWindow;
 
