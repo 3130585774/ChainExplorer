@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".BlockTransactionsListActivity"
     tools:layout_editor_absoluteY="25dp"
-    android:background="@color/c_159ee2">
+    android:background="@color/ground">
 
     <LinearLayout
         android:layout_width="match_parent"

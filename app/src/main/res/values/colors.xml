@@ -23,5 +23,6 @@
     <color name="c_loading_color">#661e212b</color>
     <color name="TRANSPARENT">#00000000</color>
     <color name="whitefont">#FFFFFF</color>
+    <color name="ground">#0C45D5</color>
 
 </resources>

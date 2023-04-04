@@ -3,7 +3,7 @@
     <style name="Theme.ChainExplorer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/bg_color</item>
-        <item name="colorPrimaryVariant">@color/c_159ee2</item>
+        <item name="colorPrimaryVariant">@color/ground</item>
         <item name="colorOnPrimary">@color/c_159ee2</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

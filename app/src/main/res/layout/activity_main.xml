@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c_159ee2"
+    android:background="@drawable/groundlittle"
     android:orientation="vertical"
-
     android:paddingTop="20dp">
 
     <!--图标-->
