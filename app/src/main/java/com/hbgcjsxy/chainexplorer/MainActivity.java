@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setOnItemClickListener((adapterView, view, position, l) -> {
             String type = Constant.TYPE_ARRAY[position];
             tvType.setText(type);
-            etInput.setText(Constant.test_btc_tx_hash[position]);//测试hash
+//            etInput.setText(Constant.test_btc_tx_hash[position]);//测试hash
             if (popupWindow != null && popupWindow.isShowing()) {
                 popupWindow.dismiss();//关闭popupwindow窗口
             }

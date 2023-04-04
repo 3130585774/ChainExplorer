@@ -3,6 +3,9 @@ package com.hbgcjsxy.chainexplorer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +14,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
@@ -27,6 +31,7 @@ public class TransactionsListActivity extends AppCompatActivity {
     @ViewInject(R.id.transaction_list)
     private ListView transactions_list;
     private List<TransactionList> transactionLists;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,9 @@ public class TransactionsListActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        Context context = getApplicationContext();
+        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        transactions_list.setLongClickable(true);
         Intent intent = getIntent();
         Intent intentout = new Intent(this,TransactionDetailActivity.class);
         //TODO 详情
@@ -44,6 +52,15 @@ public class TransactionsListActivity extends AppCompatActivity {
             intentout.putExtra("txid", transactionLists.get(i).getTxid());
             startActivity(intentout);
         });
+        transactions_list.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            System.out.println("长按啦");
+            ClipData clip = ClipData.newPlainText("simple text", transactionLists.get(i).getTxid().trim());
+            clipboardManager.setPrimaryClip(clip);
+            Toast.makeText(context, "已复制交易Hash", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
+
     }
 
     private void GetBlockTransactionList(Intent intent) {
