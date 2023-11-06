@@ -30,12 +30,22 @@
            android:textSize="45sp" />
        <TextView
            android:layout_width="match_parent"
-           android:layout_height="96dp"
+           android:layout_height="wrap_content"
            android:text="@string/app_name_english"
            android:textAlignment="center"
            android:textColor="@color/white_color"
            android:textSize="40sp"
            android:textStyle="bold" />
+       <TextView
+           android:layout_marginTop="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="挑战者"
+           android:textColor="@color/c_f0f0f0"
+           android:textAlignment="center"
+           android:textSize="40sp"/>
+
+
 
    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

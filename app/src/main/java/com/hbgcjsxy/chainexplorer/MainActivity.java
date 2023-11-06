@@ -9,12 +9,15 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -86,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout tron_block;
     //列表选项的window
     private ListPopupWindow popupWindow;
+    //刷新
+    @ViewInject(R.id.reflush)
+    private ImageView reflush;
 
 
     @Override
@@ -98,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        Context context = getApplicationContext();
         //设置输入框前的 文字的点击事件
         tvType.setOnClickListener(view -> {
             //当用户点击输入框前面的文字/下三角时，程序会到此处执行
@@ -131,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
             if (popupWindow != null && popupWindow.isShowing()) {
                 popupWindow.dismiss();//关闭popupwindow窗口
             }
+        });
+        reflush.setOnClickListener(view -> {
+            showInfo();
+            Toast.makeText(context,"刷新成功",Toast.LENGTH_SHORT).show();
         });
         btc_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[0]));
         eth_block.setOnClickListener(view -> openBlockTransactionsList(Constant.TYPE_ARRAY[1]));
