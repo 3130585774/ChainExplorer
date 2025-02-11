@@ -6,7 +6,7 @@ package com.hbgcjsxy.chainexplorer;
  */
 public class Constant {
     //访问网路的oklink接口服务的钥匙
-    public static final String API_KEY = "59906407-0356-47a8-b80c-308654cf9e40";
+    public static final String API_KEY = "251306da-54e2-4a64-ba6b-3f0f3b689867";
 
     public static final String BASE_URL = "https://www.oklink.com/";
     /**

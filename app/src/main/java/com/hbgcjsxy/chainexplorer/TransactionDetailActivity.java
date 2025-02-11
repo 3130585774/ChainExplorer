@@ -2,72 +2,55 @@ package com.hbgcjsxy.chainexplorer;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.hbgcjsxy.chainexplorer.databinding.ActivityMainBinding;
+import com.hbgcjsxy.chainexplorer.databinding.ActivityTransactionDetailBinding;
 
 import org.json.JSONObject;
 import org.xutils.HttpManager;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
-
+import  org.xutils.x;
 import java.util.Dictionary;
 import java.util.Objects;
 
 
-@SuppressLint("NonConstantResourceId")
-@ContentView(R.layout.activity_transaction_detail)
+
 public class TransactionDetailActivity extends AppCompatActivity {
-    @ViewInject(R.id.iv_back)
-    private ImageView iv_back;
-    @ViewInject(R.id.iv_logo)
-    private ImageView iv_logo;
-    @ViewInject(R.id.tv_logo_title)
-    private TextView tv_logo_title;
-    @ViewInject(R.id.tv_block_height)
-    private TextView tv_block_height;
-    @ViewInject(R.id.tv_confirm)
-    private TextView tv_confirm;
-    @ViewInject(R.id.tv_transactionTime)
-    private TextView tv_transactionTime;
-    @ViewInject(R.id.tv_totalTransactionSize)
-    private TextView tv_totalTransactionSize;
-    @ViewInject(R.id.tv_virtualSize)
-    private TextView tv_virtualSize;
-    @ViewInject(R.id.tv_weight)
-    private TextView tv_weight;
-    @ViewInject(R.id.tv_input)
-    private TextView tv_input;
-    @ViewInject(R.id.tv_output)
-    private TextView tv_output;
-    @ViewInject(R.id.tv_txfee)
-    private TextView tv_txfee;
+    private ActivityTransactionDetailBinding binding;
+
+
     private AlertDialog alertDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        x.view().inject(this);
 
-        //1、根据用户的选择和输入的内容 通过网络查询交易数据
-        Intent intent = getIntent();
-//        ResponseSerializable responseSerializable=(ResponseSerializable) intent.getSerializableExtra("re");
-//        Response response = responseSerializable.getResponse();
-        iv_back.setOnClickListener(view -> {
-            Iv_back();
-        });
+        super.onCreate(savedInstanceState);
+
+
+        binding = ActivityTransactionDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         HttpManager manager = x.http();
+
         RequestParams params = new RequestParams(Constant.BASE_URL + Constant.TRANSACTION);
         params.addHeader("Ok-Access-Key", Constant.API_KEY);
+
+        Intent intent = getIntent();
+
         params.addParameter("chainShortName", intent.getStringExtra("type"));
         params.addParameter("txid", intent.getStringExtra("txid"));
+
         System.out.println(params);
         manager.get(params, new Callback.CommonCallback<org.json.JSONObject>() {
             @Override
@@ -81,7 +64,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 //网络请求遇到错误时会调用该方法
-//                System.out.println(ex);
+                System.out.println(ex);
                 System.out.println("error");
                 searchError();
 
@@ -119,27 +102,27 @@ public class TransactionDetailActivity extends AppCompatActivity {
         Data data = transaction_fills.getData().get(0);
         String chainShortName = data.getChainShortName();
         System.out.println(chainShortName);
-        if (Objects.equals(chainShortName, "BTC")) iv_logo.setImageResource(R.drawable.btc_logo);
-        if (Objects.equals(chainShortName, "ETH")) iv_logo.setImageResource(R.drawable.eth_logo);
-        if (Objects.equals(chainShortName, "OKTC")) iv_logo.setImageResource(R.drawable.okc_logo);
-        if (Objects.equals(chainShortName, "TRON")) iv_logo.setImageResource(R.drawable.tron_logo);
+        if (Objects.equals(chainShortName, "BTC")) binding.ivLogo.setImageResource(R.drawable.btc_logo);
+        if (Objects.equals(chainShortName, "ETH")) binding.ivLogo.setImageResource(R.drawable.eth_logo);
+        if (Objects.equals(chainShortName, "OKTC")) binding.ivLogo.setImageResource(R.drawable.okc_logo);
+        if (Objects.equals(chainShortName, "TRON")) binding.ivLogo.setImageResource(R.drawable.tron_logo);
 
-        tv_logo_title.setText(data.getChainFullName());
-        tv_block_height.setText(data.getHeight());
-        tv_confirm.setText(data.getConfirm());
-        tv_transactionTime.setText(Uitls.TimestampToTime(data.getTransactionTime()));
-        tv_totalTransactionSize.setText(Objects.equals(data.getTotalTransactionSize(), "") ? "-" : String.format("%s Byte", data.getTotalTransactionSize()));
-        tv_virtualSize.setText(Objects.equals(data.getVirtualSize(), "") ? "-" : String.format("%s Byte", data.getVirtualSize()));
-        tv_weight.setText(Objects.equals(data.getWeight(), "") ?"-":data.getWeight());
+        binding.tvLogoTitle.setText(data.getChainFullName());
+        binding.tvBlockHeight.setText(data.getHeight());
+        binding.tvConfirm.setText(data.getConfirm());
+        binding.tvTransactionTime.setText(Uitls.TimestampToTime(data.getTransactionTime()));
+        binding.tvTotalTransactionSize.setText(Objects.equals(data.getTotalTransactionSize(), "") ? "-" : String.format("%s Byte", data.getTotalTransactionSize()));
+        binding.tvVirtualSize.setText(Objects.equals(data.getVirtualSize(), "") ? "-" : String.format("%s Byte", data.getVirtualSize()));
+        binding.tvWeight.setText(Objects.equals(data.getWeight(), "") ?"-":data.getWeight());
         if (Objects.equals(chainShortName, "BTC")) {
             Dictionary<String, Double> De = Uitls.CalculateTransaction(data.getInputDetails(), data.getOutputDetails());
-            tv_input.setText(String.format("%.8f %s", De.get("input"), data.getTransactionSymbol()));
-            tv_output.setText(String.format("%.8f %s", De.get("output"), data.getTransactionSymbol()));
+            binding.tvInput.setText(String.format("%.8f %s", De.get("input"), data.getTransactionSymbol()));
+            binding.tvOutput.setText(String.format("%.8f %s", De.get("output"), data.getTransactionSymbol()));
         } else {
-            tv_input.setText("-");
-            tv_output.setText("-");
+            binding.tvInput.setText("-");
+            binding.tvOutput.setText("-");
         }
-        tv_txfee.setText(data.getTxfee());
+        binding.tvTxfee.setText(data.getTxfee());
 
 
     }

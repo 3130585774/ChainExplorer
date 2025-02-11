@@ -8,22 +8,15 @@
     android:orientation="vertical"
     android:paddingTop="20dp">
 
-    <!--图标-->
 
-
+    <!--搜索栏行-->
     <ImageView
         android:layout_width="133dp"
         android:layout_height="127dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/logo"
-        tools:ignore="ContentDescription" />
+        android:contentDescription="logo"
+        android:src="@drawable/logo" />
 
-
-    <!--标题-->
-
-    <!--搜索栏行-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,31 +27,31 @@
         android:textSize="30sp" />
 
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/shape_explorer_edit_bg"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
 
-        <!--展示用户的选项-->
+        <!-- 选择币种 -->
         <TextView
             android:id="@+id/tv_type"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:paddingHorizontal="5dp"
             android:text="BTC"
             android:textColor="@color/c_333333"
-            app:drawableRightCompat="@mipmap/ic_arrow_down"
-            tools:ignore="HardcodedText,RtlHardcoded" />
+            android:textSize="16sp"
+            app:drawableRightCompat="@mipmap/ic_arrow_down" />
 
-        <!--供用户输入内容的输入框-->
+        <!-- 交易Hash输入框 -->
         <EditText
             android:id="@+id/et_hash"
             android:layout_width="0dp"
@@ -68,485 +61,64 @@
             android:background="@null"
             android:hint="交易Hash"
             android:inputType="text"
-            android:lines="1"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:textColor="@color/c_333333"
             android:textColorHint="@color/c_999999"
-            android:textSize="15sp"
+            android:textSize="16sp"
             tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
-        <!--向右的箭头-->
+        <!-- 搜索按钮 -->
         <Button
             android:id="@+id/btn_search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/go"
-            tools:ignore="RtlHardcoded,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:foreground="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/reflush"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="right"
-        android:src="@drawable/reflush2"
-        android:layout_marginTop="35dp"
-        android:layout_marginRight="15dp"/>
 
-    <GridLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="356dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:columnCount="2"
-        android:padding="5dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/btc_block"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:padding="10dp">
-
+        <!-- 使用 NestedScrollView 确保可以滑动 -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <ImageView
-                    android:id="@+id/iv_btc_block"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/btc_logo"
-                    tools:ignore="ContentDescription" />
+                <include
+                    android:id="@+id/btc_block"
+                    layout="@layout/item_crypto_block" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <include
+                    android:id="@+id/eth_block"
+                    layout="@layout/item_crypto_block" />
 
-                    <TextView
+                <include
+                    android:id="@+id/okc_block"
+                    layout="@layout/item_crypto_block" />
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="BTC"
-                        android:textColor="#FFFFFF"
-                        android:textSize="30sp"
-                        tools:ignore="HardcodedText" />
-
-                </LinearLayout>
-
+                <include
+                    android:id="@+id/tron_block"
+                    layout="@layout/item_crypto_block" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        </androidx.core.widget.NestedScrollView>
 
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="市值排名"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/btc_tv_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="No.1"
-                    android:textAlignment="textEnd"
-
-                    android:textColor="@color/whitefont" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="区块高度"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/btc_tv_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="783152"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/whitefont" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="最新出块时间"
-                    android:textColor="@color/whitefont" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/btc_tv_lastBlockTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2023年03月30 16:28"
-                android:textAlignment="textEnd"
-                android:textColor="#FFFFFF" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/eth_block"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_eth_block"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/eth_logo" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="ETH"
-                        android:textColor="@color/whitefont"
-                        android:textSize="30sp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="市值排名"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/eth_tv_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="No.2"
-                    android:textAlignment="textEnd"
-
-                    android:textColor="@color/whitefont" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="区块高度"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/eth_tv_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="16938883"
-                    android:textAlignment="textEnd"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="最新出块时间"
-                    android:textColor="@color/whitefont" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/eth_tv_lastBlockTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2023年03月30 16:29"
-                android:textAlignment="textEnd"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/okc_block"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_okc_block"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/okc_logo" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="OKC"
-                        android:textColor="#FFFFFF"
-                        android:textSize="30sp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="市值排名"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/okc_tv_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="No.16"
-                    android:textAlignment="textEnd"
-
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="区块高度"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/okc_tv_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="18396367"
-                    android:textAlignment="textEnd"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="最新出块时间"
-                    android:textColor="@color/whitefont" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/okc_tv_lastBlockTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2023年03月30 16:28"
-                android:textAlignment="textEnd"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/tron_block"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_tron_block"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/tron_logo" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TRON"
-                        android:textColor="#FFFFFF"
-                        android:textSize="30sp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="市值排名"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/tron_tv_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="No.16"
-                    android:textAlignment="textEnd"
-
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="区块高度"
-                    android:textColor="@color/whitefont" />
-
-                <TextView
-                    android:id="@+id/tron_tv_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="49850841"
-                    android:textAlignment="textEnd"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="最新出块时间"
-                    android:textColor="@color/whitefont" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tron_tv_lastBlockTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2023年03月30 16:30"
-                android:textAlignment="textEnd"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-
-
-    </GridLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>
