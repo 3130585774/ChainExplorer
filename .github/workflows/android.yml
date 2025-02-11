@@ -8,19 +8,32 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK 11
+    
+    - name: Set up JDK 11
       uses: actions/setup-java@v4
       with:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
 
-    - name: Grant execute permission for gradlew
+    - name: Grant execute permission for Gradle
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    
+    - name: Build with Gradle (Release)
+      run: ./gradlew assembleRelease
+
+    - name: Create Release
+      id: create_release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: v1.0.${{ github.run_number }}
+        name: "Release v1.0.${{ github.run_number }}"
+        body: "Auto-generated release from CI."
+        draft: false
+        prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: "app/build/outputs/apk/release/app-release-unsigned.apk"
